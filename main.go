@@ -15,6 +15,7 @@ func main() {
 	}
 
 	mux.HandleFunc("POST /register", register)
+	mux.Handle("POST /upload", authMiddleware(http.HandlerFunc(upload)))
 
 	fmt.Printf("Serving on port%v\n", srv.Addr)
 	log.Fatal(srv.ListenAndServe())
