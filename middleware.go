@@ -11,8 +11,8 @@ func authMiddleware(next http.Handler) http.Handler {
 		}
 
 		mu.Lock()
-		defer mu.Unlock()
 		_, ok := apiKeysByKeys[key]
+		mu.Unlock()
 		if !ok {
 			http.Error(w, "Invalid API Key", http.StatusUnauthorized)
 			return

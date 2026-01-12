@@ -8,6 +8,11 @@ import (
 	"path/filepath"
 )
 
+// var (
+// 	files   []string
+// 	filesMu sync.Mutex
+// )
+
 func upload(w http.ResponseWriter, r *http.Request) {
 	file, header, err := r.FormFile("file")
 	if err != nil {
@@ -37,5 +42,10 @@ func upload(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "failed to upload", http.StatusInternalServerError)
 		return
 	}
+
+	// filesMu.Lock()
+	// files = append(files, header.Filename)
+	// filesMu.Unlock()
+
 	fmt.Fprintf(w, "uploaded %d bytes\n", n)
 }
